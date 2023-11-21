@@ -1,36 +1,56 @@
+
 import processing.core.PApplet;
+import processing.core.PImage;
 
-public class Sketch extends PApplet {
+public class Sketch extends PApplet{
 	
 	
-  /**
-   * Called once at the beginning of execution, put your size all in this method
-   */
   public void settings() {
-	// put your size call here
-    size(400, 400);
-  }
-
-  /** 
-   * Called once at the beginning of execution.  Add initial set up
-   * values here i.e background, stroke, fill etc.
-   */
-  public void setup() {
-    background(210, 255, 173);
-  }
+	// size call 
+    size(355, 145);
+      }
+  
+  //golbal variables
+  PImage backImage;
+  PImage objOne;
+  float positionX = 0;
+  float positionY = 30;
+  float postX = -110;
+  float postY = 10;
+  float speedOne = 2;
 
   /**
-   * Called repeatedly, anything drawn to the screen goes here
+   * load background image and other image
+   */
+   public void setup() {
+   backImage = loadImage("C:\\Users\\majas\\github-classroom\\SACHSTech\\processing-task-7-images-and-animation-JasonMachs\\bg3.jpg");
+   objOne = loadImage("C:\\Users\\majas\\github-classroom\\SACHSTech\\processing-task-7-images-and-animation-JasonMachs\\car1-PhotoRoom.png");
+  }
+  /**
+   * Movements in the window
    */
   public void draw() {
-	  
-	// sample code, delete this stuff
-    stroke(128);
-    line(150, 25, 270, 350);  
-
-    stroke(255);
-    line(50, 125, 70, 50);  
-  }
+	  //car
+    image(backImage, 0, 0);
+    positionX = positionX+speedOne;
+    image(objOne,positionX,positionY);
+    
+    // sun
+    fill(255,255,0);
+    postX = postX + (int)1;
+    postY = (float)(3*(Math.pow( (int)2 , ((int)postX) - 300)) + 25);
+    circle(postX, postY,30);
   
-  // define other methods down here.
-}
+    //edge detection
+    if(positionX<=-150){
+      speedOne=speedOne * -1;
+    }
+    if(positionX>=170){
+      speedOne=speedOne * -1;
+    } 
+    if(postX >= width){
+      postX = -110;
+      postY = 10;
+    }
+   }
+  }
